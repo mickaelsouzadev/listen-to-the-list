@@ -7,11 +7,11 @@
           	</button>
 	        <div class="collapse navbar-collapse nav-right" id="navbarNav">
 	            <ul class="navbar-nav">
-	              <li class="nav-item">
+	              <!-- <li class="nav-item">
 	                <router-link class="nav-link" to="/albums">Albuns</router-link>
-	              </li>
+	              </li> -->
 	              <li class="nav-item">
-	                <router-link class="nav-link" to="/list">Lista</router-link>
+	                <router-link class="nav-link" to="/list">Minha Lista</router-link>
 	              </li>
 	            </ul>
 	        </div>

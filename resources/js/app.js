@@ -12,6 +12,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
+Vue.component('albums-component', require('./components/AlbumsComponent.vue').default);
 Vue.component('navbar-component', require('./components/NavbarComponent.vue').default);
 
 import { routes } from './routes';

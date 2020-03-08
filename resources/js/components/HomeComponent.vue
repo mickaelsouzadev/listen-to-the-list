@@ -14,14 +14,32 @@
             </div>
         </div>
         <div v-show="show" class="row justify-content-center mt-5 p-3">
-           <div class="card bg-none m-3" v-for="album in albums" v-if="album.image[3]['#text'] != ''" style="width: 14rem;">
-             <img class="card-img-top" :src="album.image[3]['#text']" alt="Card image cap">
-             <div class="card-body text-center">
-               <p class="album-title">{{ album.name }}</p>
-               <p class="album-artist">{{ album.artist }}</p>
-               <button class="btn btn-album-outline btn-rounded">Adicionar</button>
-             </div>
-           </div>
+           <albums-component v-for="album in albums" v-bind:key="album.mbid" :album="album" @add="addToMyList(album)" ></albums-component>
+        </div>
+        <div class="modal" id="myListModal" tabindex="-1" role="dialog" aria-labelledby="myListModal" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-custom">
+                <h5 class="modal-title">Minha Lista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row pl-4" v-for="album in my_list">
+                    <div class="col-xs-6">
+                        <img width="50"  :src="album.image[1]['#text']" alt="Card image cap"> 
+                    </div>
+                    <div class="col-xs-6 pt-2 pl-3">
+                        <p style="font-size: 0.9rem; margin-bottom: -0.1rem"><strong>{{ album.name }}</strong></p>
+                        <p style="font-size: 0.8rem">{{ album.artist }}</p>  
+                    </div>
+                   
+                </div>
+              </div>
+              
+            </div>
+          </div>
         </div>
     </div>
 </template>
@@ -31,6 +49,7 @@
         data () {
             return {
                 search: "",
+                my_list: [],
                 albums: null,
                 show: false,
             }
@@ -41,10 +60,12 @@
         methods: {
             async searchAlbum() {
 
+                this.albums = null
+
                 const params = {
                     method: 'album.search',
                     album: this.search,
-                    api_key: 'YOUR_API_KEY',
+                    api_key: 'LAST_FM_API_KEY',
                     format: 'json'
                 }
 
@@ -55,14 +76,18 @@
                    this.albums = response.data.results.albummatches.album
                    this.show = true
 
-                   console.log(this.albums)
                 } catch(error) {
                     console.error("Olha o erro ai: ", error)
                 }
                 
             },
 
-        
+            addToMyList(album) {
+                this.my_list.push(album)
+                console.table(this.my_list)
+                
+            }
+           
         }
 
        
@@ -118,5 +143,16 @@
 
     .btn-rounded {
         border-radius: 50px;
+    }
+
+    .modal-content {
+        border-radius: 0;
+        border: none;
+    }
+
+    .modal-header {
+        border-radius: 0;
+        border: none;
+        color: #fff;
     }
 </style>
