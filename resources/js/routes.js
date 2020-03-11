@@ -1,15 +1,19 @@
 import Home from './components/HomeComponent.vue'
-import Albums from './components/AlbumsComponent.vue'
+import Login from './components/LoginComponent.vue'
 import List from './components/ListComponent.vue'
 
 export const routes = [
+    {
+        path:'/',
+        redirect: '/home'
+    },
     {
         path:'/home',
         component:Home
     },
     {
-        path:'/albums',
-        component:Albums
+        path:'/login',
+        component:Login
     },
     { 
         path:'/list',

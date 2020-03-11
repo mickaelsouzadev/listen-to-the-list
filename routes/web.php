@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::post('/test-socialite', function(Request $request) {
+	$access_token = $request->input('access_token');
+
+
+
+	$user = Socialite::driver('google')->userFromToken($access_token);
+
+
+	dd($user);
 });

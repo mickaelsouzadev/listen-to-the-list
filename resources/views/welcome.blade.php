@@ -14,7 +14,6 @@
         <div id="app">
             <navbar-component></navbar-component>
             <router-view></router-view>
-            <home-component></home-component>
         </div>
     </body>
 </html>

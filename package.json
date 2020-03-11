@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "vform": "^1.0.1",
+        "vue-google-login": "^2.0.3",
         "vue-router": "^3.1.6",
         "watch": "^1.0.2"
     }

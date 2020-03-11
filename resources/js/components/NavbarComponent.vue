@@ -13,6 +13,9 @@
 	              <li class="nav-item">
 	                <router-link class="nav-link" to="/list">Minha Lista</router-link>
 	              </li>
+	              <li class="nav-item">
+	                <router-link class="nav-link" to="/login">Entrar</router-link>
+	              </li>
 	            </ul>
 	        </div>
         </nav>
@@ -54,6 +57,6 @@
 	}
 
 	.nav-right {
-		margin-left: 75%;
+		margin-left: 55%;
 	}
 </style>
