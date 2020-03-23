@@ -15,9 +15,12 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+
 
 Route::post('/test-socialite', function(Request $request) {
 	$access_token = $request->input('access_token');
@@ -29,3 +32,6 @@ Route::post('/test-socialite', function(Request $request) {
 
 	dd($user);
 });
+
+
+// Route::post('/social-register');

@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
-	        <a class="navbar-brand navbar-title" href="#">Listen to the List</a>
+	        <a class="navbar-brand navbar-title" href="/">Listen to the List</a>
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
           	</button>
@@ -11,10 +11,13 @@
 	                <router-link class="nav-link" to="/albums">Albuns</router-link>
 	              </li> -->
 	              <li class="nav-item">
-	                <router-link class="nav-link" to="/list">Minha Lista</router-link>
+	                <router-link class="nav-link" to="list">Minha Lista</router-link>
 	              </li>
 	              <li class="nav-item">
-	                <router-link class="nav-link" to="/login">Entrar</router-link>
+	                <router-link class="nav-link" to="register">Cadastre-se</router-link>
+	              </li>
+	              <li class="nav-item">
+	                <router-link class="nav-link" to="login">Entrar</router-link>
 	              </li>
 	            </ul>
 	        </div>

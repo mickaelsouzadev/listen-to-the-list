@@ -28,7 +28,7 @@
               <div class="modal-body">
                 <div class="row pl-4" v-for="album in my_list">
                     <div class="col-xs-6">
-                        <img width="50"  :src="album.image[1]['#text']" alt="Card image cap"> 
+                        <img width="50" :src="album.image[1]['#text']" alt="Card image cap"> 
                     </div>
                     <div class="col-xs-6 pt-2 pl-3">
                         <p style="font-size: 0.9rem; margin-bottom: -0.1rem"><strong>{{ album.name }}</strong></p>
