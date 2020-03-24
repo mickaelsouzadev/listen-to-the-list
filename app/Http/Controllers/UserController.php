@@ -16,10 +16,18 @@ class UserController extends Controller
 
     }
 
-    public function socialRegister(Reqeust $request) 
+    public function socialRegister(Request $request) 
     {
     	$access_token = $request->input('access_token');
 
     	$social_user = Socialite::driver('google')->userFromToken($access_token);
+
+    	$created = User::create([
+    		'name'=>$social_user['name'],
+    		'email'=>$social_user['email'],
+    		'password' => Hash::make($social_user['id']),
+    	]);
+
+    	return response()->json($created, 200);
     }
 }

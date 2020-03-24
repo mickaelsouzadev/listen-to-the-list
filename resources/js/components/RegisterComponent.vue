@@ -2,13 +2,13 @@
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-lg-3 mt-5">
-				<form>
+				<form >
 					
 					<div class="col-lg-12 mt-3 p-2 text-center">
 						<h3 style="color: #fff">Cadastre-se</h3>
 					</div>
 					<div class="form-group">
-						<GoogleLogin class="btn btn-google-outline mb-2 btn-block" :params="params" :onSuccess="googleLoginSuccess" :onFailure="googleLoginFailure"><i class="fab fa-google google-icon"></i> Cadastre-se com o <b>Google</b></GoogleLogin>
+						<GoogleLogin class="btn btn-google-outline mb-2 btn-block" :params="params" :onSuccess="googleLoginSuccess" :onFailure="googleLoginFailure"  type="button"><i class="fab fa-google google-icon"></i> Cadastre-se com o <b>Google</b></GoogleLogin>
 					</div>
 					<p class="or"><span><i>ou</i></span></p>
 					<div class="form-group">
@@ -41,7 +41,7 @@
             return {
                 // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
                 params: {
-                    client_id: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
+                    client_id: "GOOGLE_CLIENT_ID"
                 },
                 // only needed if you want to render the button with the google ui
                 renderParams: {
@@ -60,7 +60,7 @@
         		console.log(googleResponse.access_token)
 
         		try {
-        			const response = axios.post("http://localhost:8000/test-socialite", { access_token: googleResponse.access_token})
+        			const response = axios.post("http://localhost:8000/social-register", { access_token: googleResponse.access_token})
 
         			console.log(response)
         		} catch(error) {
@@ -68,8 +68,13 @@
         		}
         	   
         	},
+
         	googleLoginFailure() {
         		console.error('Deu Ruim');
+        	},
+
+        	async defaultLogin() {
+        		console.log('A');
         	}
         },
         components: {

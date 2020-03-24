@@ -34,4 +34,4 @@ Route::post('/test-socialite', function(Request $request) {
 });
 
 
-// Route::post('/social-register');
+Route::post('/social-register', 'UserController@socialRegister');

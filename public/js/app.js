@@ -2124,7 +2124,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
       params: {
-        client_id: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
+        client_id: "GOOGLE_CLIENT_ID"
       },
       // only needed if you want to render the button with the google ui
       renderParams: {
@@ -2304,7 +2304,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log(googleResponse.access_token);
 
                 try {
-                  response = axios.post("http://localhost:8000/test-socialite", {
+                  response = axios.post("http://localhost:8000/social-register", {
                     access_token: googleResponse.access_token
                   });
                   console.log(response);
@@ -2322,6 +2322,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     googleLoginFailure: function googleLoginFailure() {
       console.error('Deu Ruim');
+    },
+    defaultLogin: function defaultLogin() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                console.log('A');
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   },
   components: {
@@ -39472,7 +39488,8 @@ var render = function() {
                   attrs: {
                     params: _vm.params,
                     onSuccess: _vm.googleLoginSuccess,
-                    onFailure: _vm.googleLoginFailure
+                    onFailure: _vm.googleLoginFailure,
+                    type: "button"
                   }
                 },
                 [
@@ -39699,7 +39716,8 @@ var render = function() {
                   attrs: {
                     params: _vm.params,
                     onSuccess: _vm.googleLoginSuccess,
-                    onFailure: _vm.googleLoginFailure
+                    onFailure: _vm.googleLoginFailure,
+                    type: "button"
                   }
                 },
                 [
@@ -55479,4 +55497,4 @@ module.exports = __webpack_require__(/*! C:\laragon\www\albums-check-list\resour
 
 /***/ })
 
-/******/ });
+/******/ });                                                        

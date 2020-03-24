@@ -7,7 +7,7 @@
 						<h3 style="color: #fff">Entrar</h3>
 					</div>
 					<div class="form-group">
-						<GoogleLogin class="btn btn-google-outline mb-2 btn-block" :params="params" :onSuccess="googleLoginSuccess" :onFailure="googleLoginFailure"><i class="fab fa-google google-icon"></i>Entrar com o <b>Google</b></GoogleLogin>
+						<GoogleLogin class="btn btn-google-outline mb-2 btn-block" :params="params" :onSuccess="googleLoginSuccess" :onFailure="googleLoginFailure" type="button"><i class="fab fa-google google-icon"></i>Entrar com o <b>Google</b></GoogleLogin>
 						<p class="or"><span><i>ou</i></span></p>
 						<div class="form-group">
 								<input type="email" class="form-control" placeholder="Email">
@@ -33,7 +33,7 @@
             return {
                 // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
                 params: {
-                    client_id: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
+                    client_id: "GOOGLE_CLIENT_ID"
                 },
                 // only needed if you want to render the button with the google ui
                 renderParams: {
