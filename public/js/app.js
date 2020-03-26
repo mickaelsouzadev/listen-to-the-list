@@ -2124,7 +2124,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
       params: {
-        client_id: "GOOGLE_CLIENT_ID"
+        client_id: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
       },
       // only needed if you want to render the button with the google ui
       renderParams: {
@@ -55497,4 +55497,4 @@ module.exports = __webpack_require__(/*! C:\laragon\www\albums-check-list\resour
 
 /***/ })
 
-/******/ });                                                        
+/******/ });

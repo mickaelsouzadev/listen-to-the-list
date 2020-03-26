@@ -33,7 +33,7 @@
             return {
                 // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
                 params: {
-                    client_id: "GOOGLE_CLIENT_ID"
+                    client_id: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
                 },
                 // only needed if you want to render the button with the google ui
                 renderParams: {

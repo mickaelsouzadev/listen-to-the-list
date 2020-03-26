@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Laravel\Socialite\Facades\Socialite;
+use App\Services\UserService;
+// use Illuminate\Support\Facades\Auth;
+// // use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+
+	protected $service;
+
+	public function __construct(UserService $service)
+	{
+		$this->service = $service;
+	}
+
     public function register() 
     {
 
@@ -18,16 +24,6 @@ class UserController extends Controller
 
     public function socialRegister(Request $request) 
     {
-    	$access_token = $request->input('access_token');
-
-    	$social_user = Socialite::driver('google')->userFromToken($access_token);
-
-    	$created = User::create([
-    		'name'=>$social_user['name'],
-    		'email'=>$social_user['email'],
-    		'password' => Hash::make($social_user['id']),
-    	]);
-
-    	return response()->json($created, 200);
+    	$this->service->createUserBySocialLogin($request);
     }
 }
