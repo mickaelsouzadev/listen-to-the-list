@@ -26,4 +26,16 @@ class UserController extends Controller
     {
     	$this->service->createUserBySocialLogin($request);
     }
+
+    public function login()
+    {
+
+    }
+
+    public function socialLogin(Request $request)
+    {
+    	$response = $this->service->authenticateUserBySocialLogin($request);
+
+    	return response()->json($response);
+    }
 }

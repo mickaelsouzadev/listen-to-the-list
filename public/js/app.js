@@ -2124,7 +2124,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
       params: {
-        client_id: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
+        client_id: "GOOGLE_ID"
       },
       // only needed if you want to render the button with the google ui
       renderParams: {
@@ -2144,25 +2144,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log('Caiu aqui');
                 googleResponse = googleUser.getAuthResponse(true);
                 console.log(googleResponse.access_token);
+                _context.prev = 2;
+                _context.next = 5;
+                return axios.post("api/social-login", {
+                  access_token: googleResponse.access_token
+                });
 
-                try {
-                  response = axios.post("http://localhost:8000/test-socialite", {
-                    access_token: googleResponse.access_token
-                  });
-                  console.log(response);
-                } catch (error) {
-                  console.error("Olha ai deu ruim: ", error);
-                }
+              case 5:
+                response = _context.sent;
+                console.log("Olha ai ", response.data);
+                _context.next = 12;
+                break;
 
-              case 4:
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](2);
+                console.error("Olha ai deu ruim: ", _context.t0);
+
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[2, 9]]);
       }))();
     },
     googleLoginFailure: function googleLoginFailure() {
@@ -2280,7 +2286,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
       params: {
-        client_id: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
+        client_id: "GOOGLE_ID"
       },
       // only needed if you want to render the button with the google ui
       renderParams: {
@@ -2304,7 +2310,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log(googleResponse.access_token);
 
                 try {
-                  response = axios.post("http://localhost:8000/social-register", {
+                  response = axios.post("api/social-register", {
                     access_token: googleResponse.access_token
                   });
                   console.log(response);

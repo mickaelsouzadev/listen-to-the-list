@@ -22,16 +22,6 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');
 
 
-Route::post('/test-socialite', function(Request $request) {
-	$access_token = $request->input('access_token');
 
 
 
-	$user = Socialite::driver('google')->userFromToken($access_token);
-
-
-	dd($user);
-});
-
-
-Route::post('/social-register', 'UserController@socialRegister');

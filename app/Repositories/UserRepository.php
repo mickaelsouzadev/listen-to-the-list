@@ -16,4 +16,11 @@ class UserRepository
 	{
 		$this->model::create($data);
 	} 
+
+	public function findUserBySocialId($data)
+	{
+		return $this->model::where($data)->first();
+	}
+
+
 }

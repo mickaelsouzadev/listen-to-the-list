@@ -33,7 +33,7 @@
             return {
                 // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
                 params: {
-                    client_id: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
+                    client_id: "GOOGLE_ID"
                 },
                 // only needed if you want to render the button with the google ui
                 renderParams: {
@@ -47,15 +47,15 @@
         },
         methods: {
         	async googleLoginSuccess(googleUser) {
-        		console.log('Caiu aqui');
+    
         	    const googleResponse = googleUser.getAuthResponse(true);
         		
         		console.log(googleResponse.access_token)
 
         		try {
-        			const response = axios.post("http://localhost:8000/test-socialite", { access_token: googleResponse.access_token})
+        			const response = await axios.post("api/social-login", { access_token: googleResponse.access_token})
 
-        			console.log(response)
+        			console.log("Olha ai ", response.data)
         		} catch(error) {
         			console.error("Olha ai deu ruim: ", error)
         		}

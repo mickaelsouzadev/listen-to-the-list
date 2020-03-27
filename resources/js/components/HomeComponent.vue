@@ -71,7 +71,7 @@
 
                 try {
 
-                    const response = await axios.get('http://ws.audioscrobbler.com/2.0/', { params })
+                    const response = await axios.get('http://ws.audioscrobbler.com/2.0/',{ params })
 
                    this.albums = response.data.results.albummatches.album
                    this.show = true

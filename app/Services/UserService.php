@@ -30,7 +30,26 @@ class UserService {
 
 		$user = $this->repository->create($data);
 
-		return response()->json(['message'=>'Sucesso!', 200);
+		return response()->json(['message'=>'Sucesso!'], 200);
+	}
+
+	public function authenticateUserBySocialLogin($request)
+	{
+		$access_token = $request->input('access_token');
+
+		$social_user = Socialite::driver('google')->userFromToken($access_token);
+
+		$user = $this->repository->findUserBySocialId(['social_id' => $social_user['id']]);
+
+		$token = $user->createToken('my-app-token')->plainTextToken;
+
+		$response = [
+			'token' => $token,
+			'user' => $user,
+		];
+
+		return $response;
+
 	}
 
 }
