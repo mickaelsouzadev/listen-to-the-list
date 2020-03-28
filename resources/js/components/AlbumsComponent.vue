@@ -4,7 +4,7 @@
 	  <div class="card-body text-center">
 	    <p class="album-title">{{ album.name }}</p>
 	    <p class="album-artist">{{ album.artist }}</p>
-	    <button class="btn btn-album-outline btn-rounded" @click="add" data-toggle="modal" data-target="#myListModal">Adicionar</button>
+	    <button v-if="isLoggedIn" class="btn btn-album-outline btn-rounded" @click="add" data-toggle="modal" data-target="#myListModal">Adicionar</button>
 	  </div>
 	</div>	
 </template>
@@ -21,6 +21,11 @@
 			add( ) {
 				this.$emit('add')
 			}
+		},
+		computed: {
+			isLoggedIn () {
+           		return this.$store.getters.getIsLoggedIn
+           }
 		}
 	};
 </script>

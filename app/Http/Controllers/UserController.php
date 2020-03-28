@@ -36,6 +36,6 @@ class UserController extends Controller
     {
     	$response = $this->service->authenticateUserBySocialLogin($request);
 
-    	return response()->json($response);
+    	return response()->json($response, 200);
     }
 }

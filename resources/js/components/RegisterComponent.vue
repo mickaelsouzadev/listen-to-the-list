@@ -41,13 +41,8 @@
             return {
                 // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
                 params: {
-                    client_id: "GOOGLE_ID"
+                    client_id: "GOOGLE_CLIENT_ID"
                 },
-                // only needed if you want to render the button with the google ui
-                renderParams: {
-                    width: 350,
-                    height: 50,
-                }
             }
         },
         mounted() {
@@ -60,7 +55,7 @@
         		console.log(googleResponse.access_token)
 
         		try {
-        			const response = axios.post("api/social-register", { access_token: googleResponse.access_token})
+        			const response = await axios.post("api/social-register", { access_token: googleResponse.access_token})
 
         			console.log(response)
         		} catch(error) {

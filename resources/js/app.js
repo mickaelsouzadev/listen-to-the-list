@@ -11,6 +11,20 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+import Vuex from 'vuex'
+Vue.use(Vuex)
+import storeData from "./store/index"
+
+const store = new Vuex.Store(
+   storeData
+)
+
+const token = localStorage.getItem('token');
+
+if (token) {
+    axios.defaults.headers.common['Authorization'] = token
+}
+
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('albums-component', require('./components/AlbumsComponent.vue').default);
 Vue.component('login-component', require('./components/LoginComponent.vue').default);
@@ -30,5 +44,6 @@ console.log(router)
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store,
 });

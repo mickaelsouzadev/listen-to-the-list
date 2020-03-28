@@ -10,13 +10,16 @@
 	              <!-- <li class="nav-item">
 	                <router-link class="nav-link" to="/albums">Albuns</router-link>
 	              </li> -->
-	              <li class="nav-item">
+	              <li v-if="isLoggedIn" class="nav-item">
 	                <router-link class="nav-link" to="list">Minha Lista</router-link>
 	              </li>
-	              <li class="nav-item">
+	              <li v-if="isLoggedIn" class="nav-item">
+	                <a class="nav-link" href="#" @click="logout">Sair</a>
+	              </li>
+	              <li v-if="!isLoggedIn" class="nav-item">
 	                <router-link class="nav-link" to="register">Cadastre-se</router-link>
 	              </li>
-	              <li class="nav-item">
+	              <li v-if="!isLoggedIn" class="nav-item">
 	                <router-link class="nav-link" to="login">Entrar</router-link>
 	              </li>
 	            </ul>
@@ -27,8 +30,21 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+    	data () {
+    		return {
+    			user: [],
+    		}
+    	},
+        computed: {
+           isLoggedIn () {
+           		return this.$store.getters.getIsLoggedIn
+           }
+        },
+        methods: {
+        	logout () {
+    		 	this.$store.dispatch('logout')
+    		 	this.$router.push('/')
+        	}
         }
     };
 </script>
