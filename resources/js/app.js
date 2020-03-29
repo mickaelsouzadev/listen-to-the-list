@@ -13,7 +13,22 @@ Vue.use(VueRouter)
 
 import Vuex from 'vuex'
 Vue.use(Vuex)
+
 import storeData from "./store/index"
+
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
+import { required, email } from 'vee-validate/dist/rules'
+
+extend('email', {
+	...email,
+	message: 'Email inválido'
+});
+
+extend('required', {
+  ...required,
+  message: 'Esse campo é obrigatório'
+});
+
 
 const store = new Vuex.Store(
    storeData
@@ -30,6 +45,8 @@ Vue.component('albums-component', require('./components/AlbumsComponent.vue').de
 Vue.component('login-component', require('./components/LoginComponent.vue').default);
 Vue.component('register-component', require('./components/RegisterComponent.vue').default);
 Vue.component('navbar-component', require('./components/NavbarComponent.vue').default);
+Vue.component('validation', ValidationProvider);
+Vue.component('observer', ValidationObserver);
 
 import { routes } from './routes';
 

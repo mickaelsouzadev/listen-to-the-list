@@ -24,18 +24,36 @@ class UserController extends Controller
 
     public function socialRegister(Request $request) 
     {
-    	$this->service->createUserBySocialLogin($request);
+    	$response = $this->service->createUserBySocialLogin($request);
+
+        if($response) {
+            return response()->json($response, 200);
+        }
+
+        return response()->json(['message'=> 'Não foi possível cadastrar o seu usuário'], 401);
     }
 
-    public function login()
+    public function login(Request $request)
     {
+        $response = $this->service->authenticateUser($request);
 
+        if($response) {
+            return response()->json($response, 200);
+        }
+
+        return response()->json(['message'=> 'Usuário ou senha incorretos'], 401);
+       
     }
 
     public function socialLogin(Request $request)
     {
     	$response = $this->service->authenticateUserBySocialLogin($request);
 
-    	return response()->json($response, 200);
+        if($response) {
+            return response()->json($response, 200);
+        }
+
+    	 return response()->json(['message'=> 'Usuário não cadastrado'], 401);
+       
     }
 }

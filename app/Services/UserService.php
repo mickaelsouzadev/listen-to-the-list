@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Repositories\UserRepository;
 
@@ -26,11 +28,42 @@ class UserService {
 			'name'=>$social_user['name'],
 			'email'=>$social_user['email'],
 			'social_id'=>$social_user['id'],
+			'password'=>Hash::make(Str::random(40))
 		);
 
 		$user = $this->repository->create($data);
 
-		return response()->json(['message'=>'Sucesso!'], 200);
+		if($user) {
+
+			$token = $user->createToken('my-app-token')->plainTextToken;
+
+			$response = [
+				'token' => $token,
+				'user' => $user,
+			];
+
+			return $response;
+		}
+		
+	}
+
+	public function authenticateUser($request) 
+	{
+		$credentials = $request->only('email', 'password');
+	
+		if (Auth::attempt($credentials)) {
+            $user = $this->repository->findUserByEmail($credentials['email']);
+
+            $token = $user->createToken('my-app-token')->plainTextToken;
+
+	        $response = [
+				'token' => $token,
+				'user' => $user,
+			];
+
+			return $response;
+        }
+
 	}
 
 	public function authenticateUserBySocialLogin($request)
@@ -39,16 +72,20 @@ class UserService {
 
 		$social_user = Socialite::driver('google')->userFromToken($access_token);
 
-		$user = $this->repository->findUserBySocialId(['social_id' => $social_user['id']]);
+		$user = $this->repository->findUserBySocialId($social_user['id']);
 
-		$token = $user->createToken('my-app-token')->plainTextToken;
+		if($user) {
+			$token = $user->createToken('my-app-token')->plainTextToken;
 
-		$response = [
-			'token' => $token,
-			'user' => $user,
-		];
+			$response = [
+				'token' => $token,
+				'user' => $user,
+			];
 
-		return $response;
+			return $response;
+		}
+
+		
 
 	}
 

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/login', 'UserController@login');
+
 Route::post('/social-login', 'UserController@socialLogin');
 
 Route::post('/social-register', 'UserController@socialRegister');

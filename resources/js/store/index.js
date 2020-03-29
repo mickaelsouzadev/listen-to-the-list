@@ -3,6 +3,7 @@ export default {
   state: {
     isLoggedIn: !!localStorage.getItem('token'),
     user: [],
+    googleClientId: "GOOGLE_CLIENT_ID",
   },
 
   getters: {
@@ -13,6 +14,10 @@ export default {
     getIsLoggedIn(state) {
       return state.isLoggedIn
     },
+
+    getGoogleClientId(state) {
+      return state.googleClientId
+    }
   },
 
   actions: {
@@ -21,7 +26,9 @@ export default {
       context.commit('setUser', data)
     },
 
-    login(context) {
+    login(context, data) {
+      localStorage.setItem('user', JSON.stringify(data.user))
+      localStorage.setItem('token', data.token)
       context.commit('doLogin')
     },
 

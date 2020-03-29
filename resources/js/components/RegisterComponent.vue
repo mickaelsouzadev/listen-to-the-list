@@ -41,7 +41,7 @@
             return {
                 // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
                 params: {
-                    client_id: "GOOGLE_CLIENT_ID"
+                    client_id: this.$store.getters.getGoogleClientId
                 },
             }
         },
@@ -57,7 +57,11 @@
         		try {
         			const response = await axios.post("api/social-register", { access_token: googleResponse.access_token})
 
-        			console.log(response)
+        			const data = response.data
+                    
+                    this.$store.dispatch('login', data)
+                    this.$router.push('home')
+                    
         		} catch(error) {
         			console.error("Olha ai deu ruim: ", error)
         		}
