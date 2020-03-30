@@ -17,6 +17,24 @@ class UserService {
 		$this->repository = $repository;
 	}
 
+	public function createUser($request) 
+	{
+		$request['password'] = Hash::make($request['password']);
+
+		$user = $this->repository->create($request->only('name', 'email', 'password'));
+
+		if($user) {
+
+			$token = $user->createToken('my-app-token')->plainTextToken;
+
+			return response()->apiAuthenticationSuccess($user, $token);
+		}
+
+		return response()->apiAuthenticationOrRegisterFailed('Não foi possível cadastrar o usuário!');
+
+	}
+
+
 	public function createUserBySocialLogin($request) 
 	{
 		$access_token = $request->input('access_token');
@@ -37,13 +55,10 @@ class UserService {
 
 			$token = $user->createToken('my-app-token')->plainTextToken;
 
-			$response = [
-				'token' => $token,
-				'user' => $user,
-			];
-
-			return $response;
+			return response()->apiAuthenticationSuccess($user, $token);
 		}
+
+		return response()->apiAuthenticationOrRegisterFailed('Não foi possível cadastrar o usuário!');
 		
 	}
 
@@ -52,18 +67,14 @@ class UserService {
 		$credentials = $request->only('email', 'password');
 	
 		if (Auth::attempt($credentials)) {
-            $user = $this->repository->findUserByEmail($credentials['email']);
+	        $user = $this->repository->findUserByEmail($credentials['email']);
 
-            $token = $user->createToken('my-app-token')->plainTextToken;
+	        $token = $user->createToken('my-app-token')->plainTextToken;
 
-	        $response = [
-				'token' => $token,
-				'user' => $user,
-			];
-
-			return $response;
+			return response()->apiAuthenticationSuccess($user, $token);
         }
 
+        return response()->apiAuthenticationOrRegisterFailed('Usuário ou senha incorreto(s)');
 	}
 
 	public function authenticateUserBySocialLogin($request)
@@ -75,17 +86,13 @@ class UserService {
 		$user = $this->repository->findUserBySocialId($social_user['id']);
 
 		if($user) {
+
 			$token = $user->createToken('my-app-token')->plainTextToken;
 
-			$response = [
-				'token' => $token,
-				'user' => $user,
-			];
-
-			return $response;
+			return response()->apiAuthenticationSuccess($user, $token);
 		}
 
-		
+		return response()->apiAuthenticationOrRegisterFailed('Usuário não cadastrado!');
 
 	}
 

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
-// use Illuminate\Support\Facades\Auth;
-// // use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -17,43 +15,25 @@ class UserController extends Controller
 		$this->service = $service;
 	}
 
-    public function register() 
+    public function register(Request $request) 
     {
-
+        return $this->service->createUser($request);
     }
 
     public function socialRegister(Request $request) 
     {
-    	$response = $this->service->createUserBySocialLogin($request);
+    	return $this->service->createUserBySocialLogin($request);
 
-        if($response) {
-            return response()->json($response, 200);
-        }
-
-        return response()->json(['message'=> 'Não foi possível cadastrar o seu usuário'], 401);
     }
 
     public function login(Request $request)
     {
-        $response = $this->service->authenticateUser($request);
-
-        if($response) {
-            return response()->json($response, 200);
-        }
-
-        return response()->json(['message'=> 'Usuário ou senha incorretos'], 401);
+       return $this->service->authenticateUser($request);
        
     }
 
     public function socialLogin(Request $request)
     {
-    	$response = $this->service->authenticateUserBySocialLogin($request);
-
-        if($response) {
-            return response()->json($response, 200);
-        }
-
-    	 return response()->json(['message'=> 'Usuário não cadastrado'], 401);
-       
+    	return $this->service->authenticateUserBySocialLogin($request);
     }
 }

@@ -2088,8 +2088,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_google_login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-google-login */ "./node_modules/vue-google-login/dist/vue-google-login.min.js");
-/* harmony import */ var vue_google_login__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_google_login__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2139,7 +2137,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2205,7 +2202,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     googleLoginFailure: function googleLoginFailure() {
-      console.error('Deu Ruim');
+      this.error = true;
+      this.message = "Não foi possível realizar o login na sua conta google";
     },
     login: function login() {
       var _this2 = this;
@@ -2255,9 +2253,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2, null, [[0, 11]]);
       }))();
     }
-  },
-  components: {
-    GoogleLogin: vue_google_login__WEBPACK_IMPORTED_MODULE_1___default.a
   }
 });
 
@@ -2334,8 +2329,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_google_login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-google-login */ "./node_modules/vue-google-login/dist/vue-google-login.min.js");
-/* harmony import */ var vue_google_login__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_google_login__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2377,14 +2370,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
       params: {
         client_id: this.$store.getters.getGoogleClientId
-      }
+      },
+      userParams: {
+        name: '',
+        email: '',
+        password: '',
+        repeatPassword: ''
+      },
+      error: false,
+      message: ''
     };
   },
   mounted: function mounted() {
@@ -2395,65 +2418,97 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var googleResponse, response, data;
+        var googleResponse, response, data, _response;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 googleResponse = googleUser.getAuthResponse(true);
-                console.log(googleResponse.access_token);
-                _context.prev = 2;
-                _context.next = 5;
+                _context.prev = 1;
+                _context.next = 4;
                 return axios.post("api/social-register", {
                   access_token: googleResponse.access_token
                 });
 
-              case 5:
+              case 4:
                 response = _context.sent;
                 data = response.data;
+                _this.error = false;
 
                 _this.$store.dispatch('login', data);
 
                 _this.$router.push('home');
 
-                _context.next = 14;
+                _context.next = 15;
                 break;
 
               case 11:
                 _context.prev = 11;
-                _context.t0 = _context["catch"](2);
-                console.error("Olha ai deu ruim: ", _context.t0);
+                _context.t0 = _context["catch"](1);
+                _response = _context.t0.response;
 
-              case 14:
+                if (_response.status === 401) {
+                  _this.error = true;
+                  _this.message = _response.data.message;
+                }
+
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 11]]);
+        }, _callee, null, [[1, 11]]);
       }))();
     },
     googleLoginFailure: function googleLoginFailure() {
-      console.error('Deu Ruim');
+      this.error = true;
+      this.message = "Não foi possível realizar o login na sua conta google";
     },
-    defaultLogin: function defaultLogin() {
+    register: function register() {
+      var _this2 = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response, data, _response2;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log('A');
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios.post("api/register", _this2.userParams);
 
-              case 1:
+              case 3:
+                response = _context2.sent;
+                data = response.data;
+                _this2.error = false;
+
+                _this2.$store.dispatch('login', data);
+
+                _this2.$router.push('home');
+
+                _context2.next = 14;
+                break;
+
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](0);
+                _response2 = _context2.t0.response;
+
+                if (_response2.status === 401) {
+                  _this2.error = true;
+                  _this2.message = _response2.data.message;
+                }
+
+              case 14:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, null, [[0, 10]]);
       }))();
     }
-  },
-  components: {
-    GoogleLogin: vue_google_login__WEBPACK_IMPORTED_MODULE_1___default.a
   }
 });
 
@@ -7021,7 +7076,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.is-invalid {\n        border-width: 2px;\n}\n.invalid-feedback {\n        font-size: 0.8rem;\n        text-align: center;\n        padding: 0.5rem;\n}\n.alert-danger {\n        color: #fff;\n        background-color: #e3342f;\n        border-color: #e3342f;\n}\n", ""]);
+exports.push([module.i, "\n.is-invalid {\n        border-width: 2px;\n}\n.invalid-feedback {\n        font-size: 0.8rem;\n        text-align: center;\n        padding: 0.1rem;\n}\n.alert-danger {\n        color: #fff;\n        background-color: #e3342f;\n        border-color: #e3342f;\n}\n", ""]);
 
 // exports
 
@@ -42370,7 +42425,7 @@ var render = function() {
                           { staticClass: "form-group" },
                           [
                             _c(
-                              "GoogleLogin",
+                              "google-login",
                               {
                                 staticClass:
                                   "btn btn-google-outline mb-2 btn-block",
@@ -42711,128 +42766,379 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-lg-3 mt-5" }, [
-        _c("form", [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "form-group" },
-            [
-              _c(
-                "GoogleLogin",
-                {
-                  staticClass: "btn btn-google-outline mb-2 btn-block",
-                  attrs: {
-                    params: _vm.params,
-                    onSuccess: _vm.googleLoginSuccess,
-                    onFailure: _vm.googleLoginFailure,
-                    type: "button"
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fab fa-google google-icon" }),
-                  _vm._v(" Cadastre-se com o "),
-                  _c("b", [_vm._v("Google")])
-                ]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._m(2),
-          _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
-          _vm._m(4),
-          _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
-          _vm._m(6)
-        ])
-      ])
+      _c(
+        "div",
+        { staticClass: "col-lg-3 mt-5" },
+        [
+          _c("observer", {
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(ref) {
+                  var handleSubmit = ref.handleSubmit
+                  return [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return handleSubmit(_vm.register)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "col-lg-12 mt-3 p-2 text-center" },
+                          [
+                            _c("h3", { staticStyle: { color: "#fff" } }, [
+                              _vm._v("Cadastre-se")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "google-login",
+                              {
+                                staticClass:
+                                  "btn btn-google-outline mb-2 btn-block",
+                                attrs: {
+                                  params: _vm.params,
+                                  onSuccess: _vm.googleLoginSuccess,
+                                  onFailure: _vm.googleLoginFailure,
+                                  type: "button"
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fab fa-google google-icon"
+                                }),
+                                _vm._v(" Cadastre-se com o "),
+                                _c("b", [_vm._v("Google")])
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "or" }, [
+                          _c("span", [_c("i", [_vm._v("ou")])])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.error,
+                                  expression: "error"
+                                }
+                              ],
+                              staticClass: "alert alert-danger mt-2",
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.message) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("validation", {
+                              attrs: { name: "name", rules: "required" },
+                              scopedSlots: _vm._u(
+                                [
+                                  {
+                                    key: "default",
+                                    fn: function(ref) {
+                                      var errors = ref.errors
+                                      return [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.userParams.name,
+                                              expression: "userParams.name"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: { "is-invalid": errors[0] },
+                                          attrs: {
+                                            type: "text",
+                                            placeholder: "Nome Completo"
+                                          },
+                                          domProps: {
+                                            value: _vm.userParams.name
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.userParams,
+                                                "name",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          { staticClass: "invalid-feedback" },
+                                          [_vm._v(_vm._s(errors[0]))]
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ],
+                                null,
+                                true
+                              )
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("validation", {
+                              attrs: { name: "email", rules: "required|email" },
+                              scopedSlots: _vm._u(
+                                [
+                                  {
+                                    key: "default",
+                                    fn: function(ref) {
+                                      var errors = ref.errors
+                                      return [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.userParams.email,
+                                              expression: "userParams.email"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: { "is-invalid": errors[0] },
+                                          attrs: { placeholder: "Email" },
+                                          domProps: {
+                                            value: _vm.userParams.email
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.userParams,
+                                                "email",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          { staticClass: "invalid-feedback" },
+                                          [_vm._v(_vm._s(errors[0]))]
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ],
+                                null,
+                                true
+                              )
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("observer", [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("validation", {
+                                attrs: {
+                                  name: "password",
+                                  rules: "required|confirmed:repeatPassword"
+                                },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "default",
+                                      fn: function(ref) {
+                                        var errors = ref.errors
+                                        return [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.userParams.password,
+                                                expression:
+                                                  "userParams.password"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            class: { "is-invalid": errors[0] },
+                                            attrs: {
+                                              type: "password",
+                                              placeholder: "Senha"
+                                            },
+                                            domProps: {
+                                              value: _vm.userParams.password
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.userParams,
+                                                  "password",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            { staticClass: "invalid-feedback" },
+                                            [_vm._v(_vm._s(errors[0]))]
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  null,
+                                  true
+                                )
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("validation", {
+                                attrs: {
+                                  name: "repeat-password",
+                                  rules: "required",
+                                  vid: "repeatPassword"
+                                },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "default",
+                                      fn: function(ref) {
+                                        var errors = ref.errors
+                                        return [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.userParams.repeatPassword,
+                                                expression:
+                                                  "userParams.repeatPassword"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            class: { "is-invalid": errors[0] },
+                                            attrs: {
+                                              type: "password",
+                                              placeholder: "Repetir senha"
+                                            },
+                                            domProps: {
+                                              value:
+                                                _vm.userParams.repeatPassword
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.userParams,
+                                                  "repeatPassword",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            { staticClass: "invalid-feedback" },
+                                            [_vm._v(_vm._s(errors[0]))]
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  null,
+                                  true
+                                )
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-album-outline mb-2 btn-block",
+                              attrs: { type: "submit" }
+                            },
+                            [_vm._v("Cadastrar")]
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12 mt-3 p-2 text-center" }, [
-      _c("h3", { staticStyle: { color: "#fff" } }, [_vm._v("Cadastre-se")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "or" }, [
-      _c("span", [_c("i", [_vm._v("ou")])])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Nome Completo" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "email", placeholder: "Email" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "password", placeholder: "Senha" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "password", placeholder: "Repetir senha" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-album-outline mb-2 btn-block",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Cadastrar")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -59011,9 +59317,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
+/* harmony import */ var vue_google_login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-google-login */ "./node_modules/vue-google-login/dist/vue-google-login.min.js");
+/* harmony import */ var vue_google_login__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_google_login__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -59035,11 +59343,15 @@ Vue.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
 
-Object(vee_validate__WEBPACK_IMPORTED_MODULE_3__["extend"])('email', _objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_4__["email"], {
+
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_4__["extend"])('email', _objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__["email"], {
   message: 'Email inválido'
 }));
-Object(vee_validate__WEBPACK_IMPORTED_MODULE_3__["extend"])('required', _objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_4__["required"], {
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_4__["extend"])('required', _objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__["required"], {
   message: 'Esse campo é obrigatório'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_4__["extend"])('confirmed', _objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__["confirmed"], {
+  message: 'Senhas não conferem'
 }));
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store(_store_index__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var token = localStorage.getItem('token');
@@ -59053,12 +59365,13 @@ Vue.component('albums-component', __webpack_require__(/*! ./components/AlbumsCom
 Vue.component('login-component', __webpack_require__(/*! ./components/LoginComponent.vue */ "./resources/js/components/LoginComponent.vue")["default"]);
 Vue.component('register-component', __webpack_require__(/*! ./components/RegisterComponent.vue */ "./resources/js/components/RegisterComponent.vue")["default"]);
 Vue.component('navbar-component', __webpack_require__(/*! ./components/NavbarComponent.vue */ "./resources/js/components/NavbarComponent.vue")["default"]);
-Vue.component('validation', vee_validate__WEBPACK_IMPORTED_MODULE_3__["ValidationProvider"]);
-Vue.component('observer', vee_validate__WEBPACK_IMPORTED_MODULE_3__["ValidationObserver"]);
+Vue.component('validation', vee_validate__WEBPACK_IMPORTED_MODULE_4__["ValidationProvider"]);
+Vue.component('observer', vee_validate__WEBPACK_IMPORTED_MODULE_4__["ValidationObserver"]);
+Vue.component('google-login', vue_google_login__WEBPACK_IMPORTED_MODULE_3___default.a);
  //Register Routes
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  routes: _routes__WEBPACK_IMPORTED_MODULE_5__["routes"],
+  routes: _routes__WEBPACK_IMPORTED_MODULE_6__["routes"],
   mode: 'history'
 });
 console.log(router);
@@ -59609,9 +59922,55 @@ var routes = [{
   !*** ./resources/js/store/index.js ***!
   \*************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\laragon\\www\\albums-check-list\\resources\\js\\store\\index.js: Unexpected token, expected \",\" (32:6)\n\n\u001b[0m \u001b[90m 30 | \u001b[39m      localStorage\u001b[33m.\u001b[39msetItem(\u001b[32m'user'\u001b[39m\u001b[33m,\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(data\u001b[33m.\u001b[39muser))\u001b[0m\n\u001b[0m \u001b[90m 31 | \u001b[39m      localStorage\u001b[33m.\u001b[39msetItem(\u001b[32m'token'\u001b[39m\u001b[33m,\u001b[39m (data\u001b[33m.\u001b[39mtoken)\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 | \u001b[39m      context\u001b[33m.\u001b[39mcommit(\u001b[32m'doLogin'\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 33 | \u001b[39m    }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 34 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 35 | \u001b[39m    logout(context) {\u001b[0m\n    at Parser._raise (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:723:17)\n    at Parser.raiseWithData (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:716:17)\n    at Parser.raise (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:710:17)\n    at Parser.unexpected (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:8610:16)\n    at Parser.expect (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:8596:28)\n    at Parser.parseCallExpressionArguments (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9640:14)\n    at Parser.parseSubscript (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9566:31)\n    at Parser.parseSubscripts (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9496:19)\n    at Parser.parseExprSubscripts (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9485:17)\n    at Parser.parseMaybeUnary (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9459:21)\n    at Parser.parseExprOps (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9329:23)\n    at Parser.parseMaybeConditional (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9302:23)\n    at Parser.parseMaybeAssign (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9257:21)\n    at Parser.parseExpression (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9209:23)\n    at Parser.parseStatementContent (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:11045:23)\n    at Parser.parseStatement (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10916:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:11490:25)\n    at Parser.parseBlockBody (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:11477:10)\n    at Parser.parseBlock (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:11461:10)\n    at Parser.parseFunctionBody (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10477:24)\n    at Parser.parseFunctionBodyAndFinish (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10446:10)\n    at Parser.parseMethod (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10408:10)\n    at Parser.parseObjectMethod (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10324:19)\n    at Parser.parseObjPropValue (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10366:23)\n    at Parser.parseObjectMember (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10290:10)\n    at Parser.parseObj (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10211:25)\n    at Parser.parseExprAtom (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9836:28)\n    at Parser.parseExprSubscripts (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9479:23)\n    at Parser.parseMaybeUnary (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9459:21)\n    at Parser.parseExprOps (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9329:23)\n    at Parser.parseMaybeConditional (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9302:23)\n    at Parser.parseMaybeAssign (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:9257:21)\n    at Parser.parseObjectProperty (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10341:101)\n    at Parser.parseObjPropValue (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10366:101)\n    at Parser.parseObjectMember (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10290:10)\n    at Parser.parseObj (C:\\laragon\\www\\albums-check-list\\node_modules\\@babel\\parser\\lib\\index.js:10211:25)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    isLoggedIn: !!localStorage.getItem('token'),
+    user: [],
+    googleClientId: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
+  },
+  getters: {
+    getUser: function getUser(state) {
+      return state.user;
+    },
+    getIsLoggedIn: function getIsLoggedIn(state) {
+      return state.isLoggedIn;
+    },
+    getGoogleClientId: function getGoogleClientId(state) {
+      return state.googleClientId;
+    }
+  },
+  actions: {
+    getUserFromLocalStorage: function getUserFromLocalStorage(context) {
+      var data = localStorage.getItem('user');
+      context.commit('setUser', data);
+    },
+    login: function login(context, data) {
+      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('token', data.token);
+      context.commit('doLogin');
+    },
+    logout: function logout(context) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      context.commit('doLogout');
+    }
+  },
+  mutations: {
+    setUser: function setUser(state, data) {
+      state.user = data;
+    },
+    doLogin: function doLogin(state) {
+      state.isLoggedIn = true;
+    },
+    doLogout: function doLogout(state) {
+      state.isLoggedIn = false;
+    }
+  }
+});
 
 /***/ }),
 

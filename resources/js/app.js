@@ -16,8 +16,10 @@ Vue.use(Vuex)
 
 import storeData from "./store/index"
 
+import GoogleLogin from 'vue-google-login';
+
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
-import { required, email } from 'vee-validate/dist/rules'
+import { required, email, confirmed } from 'vee-validate/dist/rules'
 
 extend('email', {
 	...email,
@@ -28,6 +30,12 @@ extend('required', {
   ...required,
   message: 'Esse campo é obrigatório'
 });
+
+extend('confirmed', {
+  ...confirmed,
+  message: 'Senhas não conferem'
+});
+
 
 
 const store = new Vuex.Store(
@@ -47,6 +55,7 @@ Vue.component('register-component', require('./components/RegisterComponent.vue'
 Vue.component('navbar-component', require('./components/NavbarComponent.vue').default);
 Vue.component('validation', ValidationProvider);
 Vue.component('observer', ValidationObserver);
+Vue.component('google-login', GoogleLogin);
 
 import { routes } from './routes';
 

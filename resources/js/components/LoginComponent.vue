@@ -8,7 +8,7 @@
     						<h3 style="color: #fff">Entrar</h3>
     					</div>
         				<div class="form-group">
-        					<GoogleLogin class="btn btn-google-outline mb-2 btn-block" :params="params" :onSuccess="googleLoginSuccess" :onFailure="googleLoginFailure" type="button"><i class="fab fa-google google-icon"></i>Entrar com o <b>Google</b></GoogleLogin>
+        					<google-login class="btn btn-google-outline mb-2 btn-block" :params="params" :onSuccess="googleLoginSuccess" :onFailure="googleLoginFailure" type="button"><i class="fab fa-google google-icon"></i>Entrar com o <b>Google</b></google-login>
         					<p class="or"><span><i>ou</i></span></p>
                         </div>
                         <div class="form-group">
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-	import GoogleLogin from 'vue-google-login';
 
     export default {
     	data() {
@@ -88,7 +87,8 @@
         	   
         	},
         	googleLoginFailure() {
-        		console.error('Deu Ruim');
+        		this.error = true
+                this.message = "Não foi possível realizar o login na sua conta google"
         	},
 
             async login() {
@@ -117,9 +117,6 @@
                     }
                 }
             }
-        },
-        components: {
-            GoogleLogin
         }
     };
 </script>
@@ -132,7 +129,7 @@
     .invalid-feedback {
         font-size: 0.8rem;
         text-align: center;
-        padding: 0.5rem;
+        padding: 0.1rem;
     }
 
     .alert-danger {

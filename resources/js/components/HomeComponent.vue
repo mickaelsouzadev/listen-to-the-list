@@ -65,7 +65,7 @@
                 const params = {
                     method: 'album.search',
                     album: this.search,
-                    api_key: 'LAST_FM_API_KEY',
+                    api_key: 'LAST_FM_KEY',
                     format: 'json'
                 }
 
