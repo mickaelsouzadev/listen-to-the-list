@@ -21,3 +21,5 @@ Route::post('/register', 'UserController@register');
 Route::post('/social-login', 'UserController@socialLogin');
 
 Route::post('/social-register', 'UserController@socialRegister');
+
+Route::get('/test-api', 'AlbumListController@store');

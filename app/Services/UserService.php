@@ -10,7 +10,7 @@ use App\Repositories\UserRepository;
 
 class UserService {
 
-	protected $repository;
+	private $repository;
 
 	public function __construct(UserRepository $repository) 
 	{

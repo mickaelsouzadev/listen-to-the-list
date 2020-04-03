@@ -86,6 +86,12 @@
                 this.my_list.push(album)
                 console.table(this.my_list)
                 
+                const params = {
+                    'id': album.mbid,
+                    'name': album.name,
+                    'artist_name': album.artist_name,
+                    'img': album.image[3]['#text']
+                }
             }
            
         }

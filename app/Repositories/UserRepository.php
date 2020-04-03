@@ -1,21 +1,16 @@
 <?php  
 
 namespace App\Repositories;
+
+use App\Repositories\BaseRepository;
 use App\User;
 
-class UserRepository 
+class UserRepository extends BaseRepository
 {
-	private $model;
-
-	public function __construct() 
+	public function __construct(User $model) 
 	{
-		$this->model = new User();
+		parent::__construct($model);
 	}
-
-	public function create($data)
-	{
-		return $this->model::create($data);
-	} 
 
 	public function findUserBySocialId($socialId)
 	{
