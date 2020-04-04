@@ -82,15 +82,26 @@
                 
             },
 
-            addToMyList(album) {
+            async addToMyList(album) {
                 this.my_list.push(album)
-                console.table(this.my_list)
                 
-                const params = {
-                    'id': album.mbid,
-                    'name': album.name,
-                    'artist_name': album.artist_name,
-                    'img': album.image[3]['#text']
+                try {
+                    this.$store.dispatch('getUserFromLocalStorage')
+
+                    const user = this.$store.getters.getUser
+
+                    const params = {
+                        'id': album.mbid,
+                        'name': album.name,
+                        'artist_name': album.artist,
+                        'img': album.image[3]['#text'],
+                        'user_id': user.id
+                    }
+
+                    const response = await axios.post("api/albums", params)
+
+                } catch(error) {
+
                 }
             }
            

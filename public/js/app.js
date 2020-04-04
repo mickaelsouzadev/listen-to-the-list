@@ -2039,7 +2039,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 params = {
                   method: 'album.search',
                   album: _this.search,
-                  api_key: '5c290b5d8ebee607cf87a7237ad6f8ae',
+                  api_key: 'LAST_FM_KEY',
                   format: 'json'
                 };
                 _context.prev = 2;
@@ -2069,8 +2069,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     addToMyList: function addToMyList(album) {
-      this.my_list.push(album);
-      console.table(this.my_list);
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var user, params, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.my_list.push(album);
+
+                _context2.prev = 1;
+
+                _this2.$store.dispatch('getUserFromLocalStorage');
+
+                user = _this2.$store.getters.getUser;
+                params = {
+                  'id': album.mbid,
+                  'name': album.name,
+                  'artist_name': album.artist,
+                  'img': album.image[3]['#text'],
+                  'user_id': user.id
+                };
+                _context2.next = 7;
+                return axios.post("api/albums", params);
+
+              case 7:
+                response = _context2.sent;
+                _context2.next = 12;
+                break;
+
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](1);
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 10]]);
+      }))();
     }
   }
 });
@@ -59930,7 +59969,7 @@ __webpack_require__.r(__webpack_exports__);
   state: {
     isLoggedIn: !!localStorage.getItem('token'),
     user: [],
-    googleClientId: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
+    googleClientId: "GOOGLE_CLIENT_ID"
   },
   getters: {
     getUser: function getUser(state) {
@@ -59945,7 +59984,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   actions: {
     getUserFromLocalStorage: function getUserFromLocalStorage(context) {
-      var data = localStorage.getItem('user');
+      var data = JSON.parse(localStorage.getItem('user'));
       context.commit('setUser', data);
     },
     login: function login(context, data) {

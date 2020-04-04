@@ -18,6 +18,17 @@ class AlbumUserService
 
 	public function addAlbumAndUserToList($request)
 	{
-		dd($this->albumRepository->create($request));
+		$album = $this->albumRepository->create($request->only('id', 'name', 'artist_name', 'img'));
+
+		$data = [
+			'album_id'=>$album['id'],
+			'user_id'=>$request->input('user_id')
+		];
+
+		$this->albumUserRepository->create($data);
+
+		if(!$album) {
+			return response()->apiOperationFailed('Não foi possível adicionar esse albúm a sua lista!');
+		}
 	}
 }

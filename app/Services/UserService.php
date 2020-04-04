@@ -30,7 +30,7 @@ class UserService {
 			return response()->apiAuthenticationSuccess($user, $token);
 		}
 
-		return response()->apiAuthenticationOrRegisterFailed('Não foi possível cadastrar o usuário!');
+		return response()->apiOperationFailed('Não foi possível cadastrar o usuário!');
 
 	}
 
@@ -74,7 +74,7 @@ class UserService {
 			return response()->apiAuthenticationSuccess($user, $token);
         }
 
-        return response()->apiAuthenticationOrRegisterFailed('Usuário ou senha incorreto(s)');
+        return response()->apiOperationFailed('Usuário ou senha incorreto(s)');
 	}
 
 	public function authenticateUserBySocialLogin($request)
@@ -92,7 +92,7 @@ class UserService {
 			return response()->apiAuthenticationSuccess($user, $token);
 		}
 
-		return response()->apiAuthenticationOrRegisterFailed('Usuário não cadastrado!');
+		return response()->apiOperationFailed('Usuário não cadastrado!');
 
 	}
 

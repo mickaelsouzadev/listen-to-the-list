@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Album extends Model
 {
 
-	protected $fillable = ['id', 'name', 'artist_name'];
+	protected $fillable = ['id', 'name', 'artist_name', 'img'];
+	public $incrementing = false;
 
     public function users()
     {
-    	return $this->belongsToMany('App\User', 'user_has_albums');
+    	return $this->belongsToMany('App\User', 'album_user');
     }
 }

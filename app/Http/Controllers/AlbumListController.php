@@ -14,8 +14,8 @@ class AlbumListController extends Controller
 		$this->service = $service;
 	}
 
-    public function store()
+    public function store(Request $request)
     {
-    	return $this->service->addAlbumAndUserToList(['id'=>'1232153', 'name'=>'Music for the Masses', 'artist_name'=>'Depeche Mode']);
+    	return $this->service->addAlbumAndUserToList($request);
     }
 }

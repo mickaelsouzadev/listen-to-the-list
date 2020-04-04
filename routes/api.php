@@ -22,4 +22,4 @@ Route::post('/social-login', 'UserController@socialLogin');
 
 Route::post('/social-register', 'UserController@socialRegister');
 
-Route::get('/test-api', 'AlbumListController@store');
+Route::post('/albums', 'AlbumListController@store');

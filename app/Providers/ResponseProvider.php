@@ -31,7 +31,7 @@ class ResponseProvider extends ServiceProvider
             ];
         });
 
-        Response::macro('apiAuthenticationOrRegisterFailed', function($message) {
+        Response::macro('apiOperationFailed', function($message) {
             return Response::json(
                 [
                     'message'=> $message

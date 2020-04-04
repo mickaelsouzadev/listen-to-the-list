@@ -14,6 +14,6 @@ class User extends Authenticatable
 
     public function albums()
     {
-    	return $this->belongsToMany('App\Album', 'users_has_albums');
+    	return $this->belongsToMany('App\Album')->using('App\AlbumUser');;
     }
 }

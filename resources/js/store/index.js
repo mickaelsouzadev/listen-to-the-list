@@ -22,7 +22,7 @@ export default {
 
   actions: {
     getUserFromLocalStorage(context) {
-      const data = localStorage.getItem('user')
+      const data = JSON.parse(localStorage.getItem('user'))
       context.commit('setUser', data)
     },
 
