@@ -1,5 +1,5 @@
 <template>
-    <div class="container fluid p-5">
+    <div class="container-fluid p-5">
         <div class="row justify-content-center">
             <div class="col-lg-12 m-4 text-center">
                 <h4 style="color: #fff">Busque pelos seus albums e os adicione já a sua lista!</h4>
@@ -65,7 +65,7 @@
                 const params = {
                     method: 'album.search',
                     album: this.search,
-                    api_key: 'LAST_FM_KEY',
+                    api_key: 'LAST_FM_API_KEY',
                     format: 'json'
                 }
 
@@ -84,6 +84,8 @@
 
             async addToMyList(album) {
                 this.my_list.push(album)
+
+                this.removeAddedAlbum(album.mbid)
                 
                 try {
                     this.$store.dispatch('getUserFromLocalStorage')
@@ -103,6 +105,14 @@
                 } catch(error) {
 
                 }
+            },
+
+            removeAddedAlbum(id) {
+                this.albums = this.albums.filter(album => {
+                    return album.mbid !== id
+                })
+
+                console.log(this.albums)
             }
            
         }
@@ -126,11 +136,13 @@
         font-size: 1rem;
         font-weight: 500;
         font-family: 'Roboto', sans-serif;
+        color: #fff;
     }
 
     .album-artist {
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-family: 'Roboto', sans-serif;
+        color: #10ac84;
     }
 
     .bg-none {
@@ -156,10 +168,6 @@
     .btn-album-outline:active, .btn-album-outline:focus, .btn-album-outline:hover {
         background-color: #10ac84;
         color: #fff;
-    }
-
-    .btn-rounded {
-        border-radius: 50px;
     }
 
     .modal-content {
