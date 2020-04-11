@@ -1936,6 +1936,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['album'],
   data: function data() {
@@ -2023,6 +2026,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2046,36 +2054,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _this.albums = null;
+                _this.show = false;
                 params = {
                   method: 'album.search',
                   album: _this.search,
-                  api_key: 'LAST_FM_API_KEY',
+                  api_key: '5c290b5d8ebee607cf87a7237ad6f8ae',
                   format: 'json'
                 };
-                _context.prev = 2;
-                _context.next = 5;
+                _context.prev = 3;
+                _context.next = 6;
                 return axios.get('http://ws.audioscrobbler.com/2.0/', {
                   params: params
                 });
 
-              case 5:
+              case 6:
                 response = _context.sent;
                 _this.albums = response.data.results.albummatches.album;
                 _this.show = true;
-                _context.next = 13;
+                _context.next = 14;
                 break;
 
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](2);
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](3);
                 console.error("Olha o erro ai: ", _context.t0);
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 10]]);
+        }, _callee, null, [[3, 11]]);
       }))();
     },
     addToMyList: function addToMyList(album) {
@@ -7114,7 +7123,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.img-center {\n}\n.card-body {\n\t\tfloat: left;\n}\n.album-card {\n      cursor: pointer;\n}\n.card-img-top {\n\t\twebkit-transition: all 400ms ease-out;\n      transition: all 400ms ease-out;\n      float:left;\n}\n.small {\n\t\twidth: 85%;\n}\n.big {\n\t\twidth: 18rem;\n}\n.btn-rounded {\n        border-radius: 50px;\n        padding: 0.12rem 1.5rem 0.12rem 1.5rem;\n        width: 85%;\n}\n\n", ""]);
+exports.push([module.i, "\n.album-card {\n      cursor: pointer;\n}\n.card-img-top {\n      border-radius: 8%;\n}\n.btn-rounded {\n        border-radius: 50px;\n        padding: 0.5rem 1.5rem 0.5rem 1.5rem;\n}\n.fade-enter-active, .fade-leave-active {\n      transition: all .8s;\n}\n.fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {\n      opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -7133,7 +7142,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card {\n    border: none;\n    border-radius: 0;\n    color: #10ac84;\n}\n.card-img, .card-img-top {\n    border-radius: 0;\n}\n.album-title {\n    font-size: 1rem;\n    font-weight: 500;\n    font-family: 'Roboto', sans-serif;\n    color: #fff;\n}\n.album-artist {\n    font-size: 0.9rem;\n    font-family: 'Roboto', sans-serif;\n    color: #10ac84;\n}\n.bg-none {\n    background-color: transparent;\n}\n.btn-album {\n    background-color: #10ac84;\n    color: #fff;\n}\n.btn-album:active, .btn-album:focus, .btn-album:hover {\n    background-color: #10ac84;\n    color: #fff;\n}\n.btn-album-outline {\n    background-color: transparent;\n    border: 2px solid #10ac84;\n    color: #10ac84;\n}\n.btn-album-outline:active, .btn-album-outline:focus, .btn-album-outline:hover {\n    background-color: #10ac84;\n    color: #fff;\n}\n.modal-content {\n    border-radius: 0;\n    border: none;\n}\n.modal-header {\n    border-radius: 0;\n    border: none;\n    color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.card {\n    border: none;\n    border-radius: 0;\n    color: #12b751;\n}\n.card-img, .card-img-top {\n    border-radius: 0;\n}\n.album-title {\n    font-size: 1rem;\n    font-weight: 500;\n    font-family: 'Roboto', sans-serif;\n    color: #fff;\n}\n.album-artist {\n    font-size: 0.9rem;\n    font-family: 'Roboto', sans-serif;\n    color: #12b751;\n}\n.bg-none {\n    background-color: transparent;\n}\n.btn-album {\n    background-color: #12b751;\n    color: #fff;\n}\n.btn-album:active, .btn-album:focus, .btn-album:hover {\n    background-color: #12b751;\n    color: #fff;\n}\n.btn-album-outline {\n    background-color: transparent;\n    border: 2px solid #12b751;\n    color: #12b751;\n}\n.btn-album-outline:active, .btn-album-outline:focus, .btn-album-outline:hover {\n    background-color: #12b751;\n    color: #fff;\n}\n.modal-content {\n    border-radius: 0;\n    border: none;\n}\n.modal-header {\n    border-radius: 0;\n    border: none;\n    color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -7171,7 +7180,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody {\n\t\tbackground-color: #222f3e;\n}\n.bg-custom {\n        background-color: #10ac84;\n}\n.navbar-title {\n        font-weight: 700;\n        font-family: 'Poppins', sans-serif;\n        font-size: 1.4rem;\n}\n.navbar-dark .navbar-nav .nav-link {\n    \tcolor: #fff;\n    \tfont-size: 1.2rem;\n}\n.navbar-dark .navbar-nav .nav-link:hover {\n   \t\tbackground-color: #fff;\n   \t\tcolor: #10ac84;\n}\n.nav-right {\n\t\tmargin-left: 55%;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n\t\tbackground-color: #020916;\n}\n.bg-custom {\n        background-color: #12b751;\n}\n.navbar-title {\n        font-weight: 700;\n        font-family: 'Poppins', sans-serif;\n        font-size: 1.4rem;\n}\n.navbar-dark .navbar-nav .nav-link {\n    \tcolor: #fff;\n    \tfont-size: 1.2rem;\n}\n.navbar-dark .navbar-nav .nav-link:hover {\n   \t\tbackground-color: #fff;\n   \t\tcolor: #12b751;\n}\n.nav-right {\n\t\tmargin-left: 55%;\n}\n", ""]);
 
 // exports
 
@@ -7190,7 +7199,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.or {\n \t\twidth: 100%; \n\t   text-align: center; \n\t   border-bottom: 1px solid #fff; \n\t   line-height: 0.2em;\n\t   margin: 10px 0 20px;\n}\n.or span { \n\t    background:#222f3e;\n\t    color: #fff;\n\t    padding:0 10px;\n}\n.btn-google-outline {\n        background-color: transparent;\n        border: 2px solid #d9534f;\n        color: #d9534f;\n}\n.btn-google-outline:active, .btn-google-outline:focus, .btn-google-outline:hover {\n        background-color: #d9534f;\n        color: #fff;\n}\n.google-icon {\n    \tmargin-left: -3rem;\n    \tmargin-right: 1rem;\n}\n ", ""]);
+exports.push([module.i, "\n.or {\n \t\twidth: 100%; \n\t   text-align: center; \n\t   border-bottom: 1px solid #fff; \n\t   line-height: 0.2em;\n\t   margin: 10px 0 20px;\n}\n.or span { \n\t    background:#020916;\n\t    color: #fff;\n\t    padding:0 10px;\n}\n.btn-google-outline {\n        background-color: transparent;\n        border: 2px solid #e22225;\n        color: #e22225;\n}\n.btn-google-outline:active, .btn-google-outline:focus, .btn-google-outline:hover {\n        background-color: #e22225;\n        color: #fff;\n}\n.google-icon {\n    \tmargin-left: -3rem;\n    \tmargin-right: 1rem;\n}\n ", ""]);
 
 // exports
 
@@ -42246,7 +42255,6 @@ var render = function() {
             _c("div", { staticClass: "img-center" }, [
               _c("img", {
                 staticClass: "card-img-top",
-                class: { small: _vm.showName },
                 attrs: {
                   src: _vm.album.image[3]["#text"],
                   alt: "Card image cap"
@@ -42254,39 +42262,46 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "mt-3 text-left" }, [
-              _c("p", { staticClass: "album-title" }, [
-                _vm._v(_vm._s(_vm.album.name))
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "album-artist" }, [
-                _vm._v(_vm._s(_vm.album.artist))
-              ]),
-              _vm._v(" "),
-              _vm.isLoggedIn
-                ? _c(
-                    "button",
-                    {
-                      directives: [
+            _c(
+              "div",
+              { staticClass: "mt-3 text-left" },
+              [
+                _c("p", { staticClass: "album-title" }, [
+                  _vm._v(_vm._s(_vm.album.name))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "album-artist" }, [
+                  _vm._v(_vm._s(_vm.album.artist))
+                ]),
+                _vm._v(" "),
+                _c("transition", { attrs: { name: "fade" } }, [
+                  _vm.isLoggedIn
+                    ? _c(
+                        "button",
                         {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.showName,
-                          expression: "showName"
-                        }
-                      ],
-                      staticClass:
-                        "btn btn-block btn-album-outline btn-rounded",
-                      attrs: {
-                        "data-toggle": "modal",
-                        "data-target": "#myListModal"
-                      },
-                      on: { click: _vm.add }
-                    },
-                    [_vm._v("Adicionar a Lista")]
-                  )
-                : _vm._e()
-            ])
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.showName,
+                              expression: "showName"
+                            }
+                          ],
+                          staticClass:
+                            "btn btn-block btn-album-outline btn-rounded",
+                          attrs: {
+                            "data-toggle": "modal",
+                            "data-target": "#myListModal"
+                          },
+                          on: { click: _vm.add }
+                        },
+                        [_vm._v("Adicionar a Lista")]
+                      )
+                    : _vm._e()
+                ])
+              ],
+              1
+            )
           ]
         )
       : _vm._e()
@@ -42314,151 +42329,167 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid p-5" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-4" }, [
-        _c(
-          "form",
-          {
-            staticClass: "form-inline",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.searchAlbum($event)
+  return _c(
+    "div",
+    { staticClass: "container-fluid p-5" },
+    [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-4" }, [
+          _c(
+            "form",
+            {
+              staticClass: "form-inline",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.searchAlbum($event)
+                }
               }
-            }
+            },
+            [
+              _c("div", { staticClass: "form-group mx-sm-3 mb-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Nome do Album ou Artista"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-album-outline mb-2",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("Buscar")]
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "fade" } }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.show,
+                expression: "show"
+              }
+            ],
+            staticClass: "row justify-content-center mt-2 p-3"
           },
           [
-            _c("div", { staticClass: "form-group mx-sm-3 mb-2" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.search,
-                    expression: "search"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  placeholder: "Nome do Album ou Artista"
-                },
-                domProps: { value: _vm.search },
+            _c("div", { staticClass: "col-lg-12 m-3 text-center" }, [
+              _c("h4", { staticStyle: { color: "#fff" } }, [
+                _vm._v("Resultados para "),
+                _c("strong", [_vm._v(_vm._s(_vm.search))])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.albums, function(album) {
+              return _c("albums-component", {
+                key: album.mbid,
+                attrs: { album: album },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.search = $event.target.value
+                  add: function($event) {
+                    return _vm.addToMyList(album)
                   }
                 }
               })
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-album-outline mb-2",
-                attrs: { type: "submit" }
-              },
-              [_vm._v("Buscar")]
-            )
-          ]
+            })
+          ],
+          2
         )
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.show,
-            expression: "show"
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal",
+          attrs: {
+            id: "myListModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myListModal",
+            "aria-hidden": "true"
           }
-        ],
-        staticClass: "row justify-content-center mt-5 p-3"
-      },
-      _vm._l(_vm.albums, function(album) {
-        return _c("albums-component", {
-          key: album.mbid,
-          attrs: { album: album },
-          on: {
-            add: function($event) {
-              return _vm.addToMyList(album)
-            }
-          }
-        })
-      }),
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal",
-        attrs: {
-          id: "myListModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myListModal",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "modal-body" },
-                _vm._l(_vm.my_list, function(album) {
-                  return _c("div", { staticClass: "row pl-4" }, [
-                    _c("div", { staticClass: "col-xs-6" }, [
-                      _c("img", {
-                        attrs: {
-                          width: "50",
-                          src: album.image[1]["#text"],
-                          alt: "Card image cap"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-xs-6 pt-2 pl-3" }, [
-                      _c(
-                        "p",
-                        {
-                          staticStyle: {
-                            "font-size": "0.9rem",
-                            "margin-bottom": "-0.1rem"
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "modal-body" },
+                  _vm._l(_vm.my_list, function(album) {
+                    return _c("div", { staticClass: "row pl-4" }, [
+                      _c("div", { staticClass: "col-xs-6" }, [
+                        _c("img", {
+                          attrs: {
+                            width: "50",
+                            src: album.image[1]["#text"],
+                            alt: "Card image cap"
                           }
-                        },
-                        [_c("strong", [_vm._v(_vm._s(album.name))])]
-                      ),
+                        })
+                      ]),
                       _vm._v(" "),
-                      _c("p", { staticStyle: { "font-size": "0.8rem" } }, [
-                        _vm._v(_vm._s(album.artist))
+                      _c("div", { staticClass: "col-xs-6 pt-2 pl-3" }, [
+                        _c(
+                          "p",
+                          {
+                            staticStyle: {
+                              "font-size": "0.9rem",
+                              "margin-bottom": "-0.1rem"
+                            }
+                          },
+                          [_c("strong", [_vm._v(_vm._s(album.name))])]
+                        ),
+                        _vm._v(" "),
+                        _c("p", { staticStyle: { "font-size": "0.8rem" } }, [
+                          _vm._v(_vm._s(album.artist))
+                        ])
                       ])
                     ])
-                  ])
-                }),
-                0
-              )
-            ])
-          ]
-        )
-      ]
-    )
-  ])
+                  }),
+                  0
+                )
+              ])
+            ]
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -42490,6 +42521,54 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListComponent.vue?vue&type=template&id=6ee53bb8&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListComponent.vue?vue&type=template&id=6ee53bb8& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-fluid p-5" }, [
+      _c("h6", { staticClass: "text-muted" }, [_vm._v("Description List")]),
+      _vm._v(" "),
+      _c("dl", { staticClass: "row" }, [
+        _c("dt", { staticClass: "col-sm-3" }, [
+          _c("img", {
+            attrs: {
+              src:
+                "https://lastfm.freetls.fastly.net/i/u/300x300/e89712ce64e748e2960135803cea6160.png"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("dd", { staticClass: "col-sm-9", staticStyle: { color: "#fff" } }, [
+          _vm._v("Music for the Masses")
+        ])
+      ])
     ])
   }
 ]
@@ -59739,17 +59818,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
+/* harmony import */ var _ListComponent_vue_vue_type_template_id_6ee53bb8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListComponent.vue?vue&type=template&id=6ee53bb8& */ "./resources/js/components/ListComponent.vue?vue&type=template&id=6ee53bb8&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 var script = {}
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
   script,
-  render,
-  staticRenderFns,
+  _ListComponent_vue_vue_type_template_id_6ee53bb8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ListComponent_vue_vue_type_template_id_6ee53bb8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -59757,8 +59837,28 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/components/ListComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ListComponent.vue?vue&type=template&id=6ee53bb8&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/ListComponent.vue?vue&type=template&id=6ee53bb8& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListComponent_vue_vue_type_template_id_6ee53bb8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ListComponent.vue?vue&type=template&id=6ee53bb8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListComponent.vue?vue&type=template&id=6ee53bb8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListComponent_vue_vue_type_template_id_6ee53bb8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListComponent_vue_vue_type_template_id_6ee53bb8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -60076,7 +60176,7 @@ __webpack_require__.r(__webpack_exports__);
   state: {
     isLoggedIn: !!localStorage.getItem('token'),
     user: [],
-    googleClientId: "GOOGLE_CLIENT_ID"
+    googleClientId: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
   },
   getters: {
     getUser: function getUser(state) {

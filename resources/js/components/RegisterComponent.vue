@@ -142,19 +142,19 @@
  	}
 
  	.or span { 
-	    background:#222f3e;
+	    background:#020916;
 	    color: #fff;
 	    padding:0 10px; 
 	}
 
 	.btn-google-outline {
         background-color: transparent;
-        border: 2px solid #d9534f;
-        color: #d9534f;
+        border: 2px solid #e22225;
+        color: #e22225;
     }
 
     .btn-google-outline:active, .btn-google-outline:focus, .btn-google-outline:hover {
-        background-color: #d9534f;
+        background-color: #e22225;
         color: #fff;
     }
 

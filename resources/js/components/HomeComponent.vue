@@ -13,9 +13,14 @@
                </form>
             </div>
         </div>
-        <div v-show="show" class="row justify-content-center mt-5 p-3">
-           <albums-component v-for="album in albums" v-bind:key="album.mbid" :album="album" @add="addToMyList(album)" ></albums-component>
-        </div>
+        <transition name="fade">
+            <div v-show="show" class="row justify-content-center mt-2 p-3">
+                <div class="col-lg-12 m-3 text-center">
+                    <h4 style="color: #fff">Resultados para <strong>{{ search }}</strong></h4>
+                </div>
+               <albums-component v-for="album in albums" v-bind:key="album.mbid" :album="album" @add="addToMyList(album)" ></albums-component>
+            </div>
+        </transition>
         <div class="modal" id="myListModal" tabindex="-1" role="dialog" aria-labelledby="myListModal" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -61,6 +66,7 @@
             async searchAlbum() {
 
                 this.albums = null
+                this.show = false
 
                 const params = {
                     method: 'album.search',
@@ -125,7 +131,7 @@
     .card {
         border: none;
         border-radius: 0;
-        color: #10ac84;
+        color: #12b751;
     }
 
     .card-img, .card-img-top {
@@ -142,7 +148,7 @@
     .album-artist {
         font-size: 0.9rem;
         font-family: 'Roboto', sans-serif;
-        color: #10ac84;
+        color: #12b751;
     }
 
     .bg-none {
@@ -150,23 +156,23 @@
     }
 
     .btn-album {
-        background-color: #10ac84;
+        background-color: #12b751;
         color: #fff;
     }
 
     .btn-album:active, .btn-album:focus, .btn-album:hover {
-        background-color: #10ac84;
+        background-color: #12b751;
         color: #fff;
     }
 
     .btn-album-outline {
         background-color: transparent;
-        border: 2px solid #10ac84;
-        color: #10ac84;
+        border: 2px solid #12b751;
+        color: #12b751;
     }
 
     .btn-album-outline:active, .btn-album-outline:focus, .btn-album-outline:hover {
-        background-color: #10ac84;
+        background-color: #12b751;
         color: #fff;
     }
 

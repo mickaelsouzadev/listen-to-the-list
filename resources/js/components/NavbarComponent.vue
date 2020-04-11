@@ -52,11 +52,11 @@
 <style type="text/css">
 	
 	body {
-		background-color: #222f3e;
+		background-color: #020916;
 	}
 
     .bg-custom {
-        background-color: #10ac84;
+        background-color: #12b751;
     }
 
     .navbar-title {
@@ -72,7 +72,7 @@
 
 	.navbar-dark .navbar-nav .nav-link:hover {
    		background-color: #fff;
-   		color: #10ac84;
+   		color: #12b751;
 	}
 
 	.nav-right {
