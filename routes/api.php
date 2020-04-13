@@ -23,3 +23,5 @@ Route::post('/social-login', 'UserController@socialLogin');
 Route::post('/social-register', 'UserController@socialRegister');
 
 Route::post('/albums', 'AlbumListController@store');
+
+Route::get('/list/{id}', 'AlbumListController@index')->middleware('auth:sanctum');;

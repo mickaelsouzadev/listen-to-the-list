@@ -45,11 +45,12 @@ const store = new Vuex.Store(
 const token = localStorage.getItem('token');
 
 if (token) {
-    axios.defaults.headers.common['Authorization'] = token
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
 
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('albums-component', require('./components/AlbumsComponent.vue').default);
+Vue.component('item-component', require('./components/ItemComponent.vue').default);
 Vue.component('login-component', require('./components/LoginComponent.vue').default);
 Vue.component('register-component', require('./components/RegisterComponent.vue').default);
 Vue.component('navbar-component', require('./components/NavbarComponent.vue').default);

@@ -4,16 +4,19 @@ namespace App\Services;
 
 use App\Repositories\AlbumRepository as Album;
 use App\Repositories\AlbumUserRepository as AlbumUser;
+use App\Repositories\UserRepository as User;
 
 class AlbumUserService 
 {
 	private $albumUserRepository;
 	private $albumRepository;
+	private $userRepository;
 
-	public function __construct(AlbumUser $albumUser, Album $album)
+	public function __construct(AlbumUser $albumUser, Album $album, User $user)
 	{
 		$this->albumUserRepository = $albumUser;
 		$this->albumRepository = $album;
+		$this->userRepository = $user;
 	}
 
 	public function addAlbumAndUserToList($request)
@@ -30,5 +33,12 @@ class AlbumUserService
 		if(!$album) {
 			return response()->apiOperationFailed('Não foi possível adicionar esse albúm a sua lista!');
 		}
+	}
+
+	public function getAlbumList($id)
+	{
+		$user = $this->userRepository->find($id);
+
+		return $user->albums;
 	}
 }

@@ -14,6 +14,11 @@ class AlbumListController extends Controller
 		$this->service = $service;
 	}
 
+	public function index($id) 
+	{
+		return $this->service->getAlbumList($id);
+	}
+
     public function store(Request $request)
     {
     	return $this->service->addAlbumAndUserToList($request);

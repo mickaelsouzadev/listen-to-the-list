@@ -83,15 +83,16 @@
         	    const googleResponse = googleUser.getAuthResponse(true);
         
         		try {
-        			const response = await axios.post("api/social-register", { access_token: googleResponse.access_token})
+                    axios.get('/airlock/csrf-cookie').then(async () => {
+            			const response = await axios.post("api/social-register", { access_token: googleResponse.access_token})
 
-        			const data = response.data
-                    
-                    this.error = false
+            			const data = response.data
+                        
+                        this.error = false
 
-                    this.$store.dispatch('login', data)
-                    this.$router.push('home')
-                    
+                        this.$store.dispatch('login', data)
+                        this.$router.push('home')
+                    })
         		} catch(error) {
         			const response = error.response
 
@@ -110,15 +111,16 @@
 
         	async register() {
         		try {
-                    const response = await axios.post("api/register", this.userParams)
+                    axios.get('/airlock/csrf-cookie').then(async () => {
+                        const response = await axios.post("api/register", this.userParams)
 
-                    const data = response.data
-                    
-                    this.error = false
+                        const data = response.data
+                        
+                        this.error = false
 
-                    this.$store.dispatch('login', data)
-                    this.$router.push('home')
-
+                        this.$store.dispatch('login', data)
+                        this.$router.push('home')
+                    })
                 } catch(error) {
                     const response = error.response
 

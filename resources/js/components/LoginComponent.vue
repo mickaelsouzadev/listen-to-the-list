@@ -66,15 +66,16 @@
         		console.log(googleResponse.access_token)
 
         		try {
+                    axios.get('/airlock/csrf-cookie').then(async () => {
+            			const response = await axios.post("api/social-login", { access_token: googleResponse.access_token})
 
-        			const response = await axios.post("api/social-login", { access_token: googleResponse.access_token})
+                        const data = response.data
+            			
+                        this.$store.dispatch('login', data)
+                        this.$router.push('list')
 
-                    const data = response.data
-        			
-                    this.$store.dispatch('login', data)
-                    this.$router.push('home')
-
-                    this.error = false
+                        this.error = false
+                    })
         		} catch(error) {
 
         			const response = error.response
@@ -93,20 +94,21 @@
 
             async login() {
                 try {
+                    axios.get('/airlock/csrf-cookie').then(async () => {
+                        const params = {
+                            'email': this.email,
+                            'password': this.password
+                        }
 
-                    const params = {
-                        'email': this.email,
-                        'password': this.password
-                    }
+                        const response = await axios.post("api/login", params)
 
-                    const response = await axios.post("api/login", params)
+                        const data = response.data
+                        
+                        this.$store.dispatch('login', data)
+                        this.$router.push('list')
 
-                    const data = response.data
-                    
-                    this.$store.dispatch('login', data)
-                    this.$router.push('home')
-
-                    this.error = false
+                        this.error = false
+                    })
                 } catch(error) {
 
                     const response = error.response

@@ -1,14 +1,14 @@
 <template>
 <div>
-	<div data-toggle="modal"  class="card bg-none m-3 album-card" @click="selectAlbum" v-if="album.image[3]['#text'] != ''"   style="width: 12rem;">
+	<div class="card bg-none m-3 album-card" @click="selectAlbum" style="width: 12rem;">
 		<div class="img-center">
-			<img class="card-img-top" :src="album.image[3]['#text']" alt="Card image cap">
+			<img class="card-img-top" :src="album.cover_big" alt="Card image cap">
 		</div>
 		<div class="mt-3 text-left">
-			<p class="album-title">{{ album.name }}</p>
-	    	<p class="album-artist">{{ album.artist }}</p>
+			<p class="album-title">{{ album.title }}</p>
+	    	<p class="album-artist">{{ album.artist.name }}</p>
 	    <transition name="fade">
-	    	  <button v-show="showName" v-if="isLoggedIn" class="btn btn-block btn-album-outline btn-rounded" @click="add" data-toggle="modal" data-target="#myListModal">Adicionar a Lista</button>
+	    	  <button v-show="showName" v-if="isLoggedIn" class="btn btn-block btn-album-outline btn-rounded btn-add-album" @click="add" data-toggle="modal" data-target="#myListModal">Adicionar a Lista</button>
 	    </transition>
 	  
 		</div>
@@ -55,7 +55,11 @@
 
 	.btn-rounded {
         border-radius: 50px;
-        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+       	padding: 0.5rem 1rem 0.5rem 1rem;
+    }
+
+    .btn-add-album {
+    	padding: 0.5rem 1.5rem 0.5rem 1.5rem;
     }
 
     .fade-enter-active, .fade-leave-active {
