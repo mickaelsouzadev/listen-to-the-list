@@ -2031,13 +2031,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       search: "",
       my_list: [],
       albums: null,
-      show: false
+      show: false,
+      total: 0
     };
   },
   mounted: function mounted() {
@@ -2056,7 +2074,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.albums = null;
                 _this.show = false;
                 params = {
-                  q: _this.search
+                  q: _this.search,
+                  limit: 500
                 };
                 _context.prev = 3;
                 _context.next = 6;
@@ -2067,21 +2086,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 response = _context.sent;
                 _this.albums = response.data.data;
+                _this.total = response.data.total;
                 _this.show = true;
-                _context.next = 14;
+                _context.next = 15;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](3);
                 console.error("Olha o erro ai: ", _context.t0);
 
-              case 14:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 11]]);
+        }, _callee, null, [[3, 12]]);
       }))();
     },
     addToMyList: function addToMyList(album) {
@@ -7334,7 +7354,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card {\n    border: none;\n    border-radius: 0;\n    color: #12b751;\n}\n.card-img, .card-img-top {\n    border-radius: 0;\n}\n.album-title {\n    font-size: 1rem;\n    font-weight: 500;\n    font-family: 'Roboto', sans-serif;\n    color: #fff;\n}\n.album-artist {\n    font-size: 0.9rem;\n    font-family: 'Roboto', sans-serif;\n    color: #12b751;\n    line-height: 0.5rem;\n    margin-bottom: 1rem;\n}\n.bg-none {\n    background-color: transparent;\n}\n.btn-album {\n    background-color: #12b751;\n    color: #fff;\n}\n.btn-album:active, .btn-album:focus, .btn-album:hover {\n    background-color: #12b751;\n    color: #fff;\n}\n.btn-album-outline {\n    background-color: transparent;\n    border: 2px solid #12b751;\n    color: #12b751;\n}\n.btn-album-outline:active, .btn-album-outline:focus, .btn-album-outline:hover {\n    background-color: #12b751;\n    color: #fff;\n}\n.modal-content {\n    border-radius: 0;\n    border: none;\n}\n.modal-header {\n    border-radius: 0;\n    border: none;\n    color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.card {\n    border: none;\n    border-radius: 0;\n    color: #12b751;\n}\n.card-img, .card-img-top {\n    border-radius: 0;\n}\n.album-title {\n    font-size: 1rem;\n    font-weight: 500;\n    font-family: 'Roboto', sans-serif;\n    color: #fff;\n}\n.album-artist {\n    font-size: 0.9rem;\n    font-family: 'Roboto', sans-serif;\n    color: #12b751;\n    line-height: 0.5rem;\n    margin-bottom: 1rem;\n}\n.bg-none {\n    background-color: transparent;\n}\n.btn-album {\n    background-color: #12b751;\n    color: #fff;\n}\n.btn-album:active, .btn-album:focus, .btn-album:hover {\n    background-color: #12b751;\n    color: #fff;\n}\n.btn-album-outline {\n    background-color: transparent;\n    border: 2px solid #12b751;\n    color: #12b751;\n}\n.btn-album-outline:active, .btn-album-outline:focus, .btn-album-outline:hover {\n    background-color: #12b751;\n    color: #fff;\n}\n.search-input {\n    height: auto;\n    border-radius: 50px;\n}\n.has-search .form-control {\n    padding-left: 2.375rem;\n}\n.has-search .form-control-feedback {\n    position: absolute;\n    z-index: 2;\n    display: block;\n    width: 2.375rem;\n    height: 2.375rem;\n    line-height: 2.375rem;\n    text-align: center;\n    pointer-events: none;\n    color: #aaa;\n}\n.modal-content {\n    border-radius: 0;\n    border: none;\n}\n.modal-header {\n    border-radius: 0;\n    border: none;\n    color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -42571,11 +42591,10 @@ var render = function() {
       _c("div", { staticClass: "row justify-content-center" }, [
         _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-4" }, [
+        _c("div", { staticClass: "col-lg-4 mx-auto" }, [
           _c(
             "form",
             {
-              staticClass: "form-inline",
               on: {
                 submit: function($event) {
                   $event.preventDefault()
@@ -42584,7 +42603,11 @@ var render = function() {
               }
             },
             [
-              _c("div", { staticClass: "form-group mx-sm-3 mb-2" }, [
+              _c("div", { staticClass: "form-group has-search" }, [
+                _c("span", {
+                  staticClass: "fa fa-search form-control-feedback"
+                }),
+                _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
@@ -42594,11 +42617,8 @@ var render = function() {
                       expression: "search"
                     }
                   ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Nome do Album ou Artista"
-                  },
+                  staticClass: "form-control search-input",
+                  attrs: { type: "text", placeholder: "Album ou artista..." },
                   domProps: { value: _vm.search },
                   on: {
                     input: function($event) {
@@ -42609,16 +42629,7 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-album-outline mb-2",
-                  attrs: { type: "submit" }
-                },
-                [_vm._v("Buscar")]
-              )
+              ])
             ]
           )
         ])
@@ -42641,7 +42652,7 @@ var render = function() {
           [
             _c("div", { staticClass: "col-lg-12 m-3 text-center" }, [
               _c("h4", { staticStyle: { color: "#fff" } }, [
-                _vm._v("Resultados para "),
+                _vm._v(_vm._s(_vm.total) + " resultados para "),
                 _c("strong", [_vm._v(_vm._s(_vm.search))])
               ])
             ]),
@@ -60587,7 +60598,7 @@ __webpack_require__.r(__webpack_exports__);
   state: {
     isLoggedIn: !!localStorage.getItem('token'),
     user: [],
-    googleClientId: "GOOGLE_CLIENT_ID"
+    googleClientId: "650637100521-valep46gskagmirmhmpl8ovrifnjv8s6.apps.googleusercontent.com"
   },
   getters: {
     getUser: function getUser(state) {

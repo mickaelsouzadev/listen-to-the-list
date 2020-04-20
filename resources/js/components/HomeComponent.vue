@@ -3,20 +3,37 @@
         <div class="row justify-content-center">
             <div class="col-lg-12 m-4 text-center">
                 <h4 style="color: #fff">Busque pelos seus albums e os adicione já a sua lista!</h4>
-            </div>    
-            <div class="col-lg-4">
-               <form @submit.prevent="searchAlbum" class="form-inline">
-                  <div class="form-group mx-sm-3 mb-2">
-                      <input type="text" class="form-control" v-model="search" placeholder="Nome do Album ou Artista">
-                    </div>
-                    <button type="submit" class="btn btn-album-outline mb-2">Buscar</button>
-               </form>
-            </div>
+            </div>  
+        
+               <!--  <div class="col-lg-4">
+                  
+                      <div class="form-group mx-sm-3 mb-2">
+                          <input type="text" class="form-control" v-model="search" placeholder="Nome do Album ou Artista">
+                        </div>
+                        <button type="submit" class="btn btn-album-outline mb-2">Buscar</button>
+                  
+                </div>  -->
+                <div class="col-lg-4 mx-auto">
+                     <form @submit.prevent="searchAlbum">   
+                       <!--  <div class="input-group">
+                            <input type="text" class="form-control search-input" placeholder="Album ou artista..." v-model="search">
+                            <span class="input-group-btn">
+                                <button class="btn btn-album-outline btn-search" type="submit">Buscar</button>
+                            </span>
+                        </div> -->
+                           <div class="form-group has-search">
+                                <span class="fa fa-search form-control-feedback"></span>
+                                <input type="text" v-model="search" class="form-control search-input" placeholder="Album ou artista...">
+                            </div>
+                    </form>
+                </div>
+            
+            
         </div>
         <transition name="fade">
             <div v-show="show" class="row justify-content-center mt-2 p-3">
                 <div class="col-lg-12 m-3 text-center">
-                    <h4 style="color: #fff">Resultados para <strong>{{ search }}</strong></h4>
+                    <h4 style="color: #fff">{{ total }} resultados para <strong>{{ search }}</strong></h4>
                 </div>
                <albums-component v-for="album in albums" v-bind:key="album.mbid" :album="album" @add="addToMyList(album)" ></albums-component>
             </div>
@@ -57,6 +74,7 @@
                 my_list: [],
                 albums: null,
                 show: false,
+                total: 0,
             }
         },
         mounted() {
@@ -72,6 +90,7 @@
 
                 const params = {
                     q: this.search,
+                    limit: 500,
                 }
 
                 try {
@@ -79,7 +98,7 @@
                     const response = await axios.get('https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/album',{ params })
 
                    this.albums = response.data.data
-                   
+                   this.total = response.data.total
                    this.show = true
 
                 } catch(error) {
@@ -176,6 +195,27 @@
     .btn-album-outline:active, .btn-album-outline:focus, .btn-album-outline:hover {
         background-color: #12b751;
         color: #fff;
+    }
+
+    .search-input {
+        height: auto;
+        border-radius: 50px;
+    }
+
+    .has-search .form-control {
+        padding-left: 2.375rem;
+    }
+
+    .has-search .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        line-height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        color: #aaa;
     }
 
     .modal-content {
